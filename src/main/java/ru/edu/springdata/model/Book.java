@@ -9,16 +9,41 @@ package ru.edu.springdata.model;
  * Между авторами и адресами свзяь один к одному
  */
 
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@Table(name = "books")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
+    @SequenceGenerator(name="book_seq", sequenceName = "BOOKS_SEQ", allocationSize = 1)
     private Long id;
 
+    @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "language")
     private String language;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "category_id")
     private Category category;
 
+    @Column(name = "active")
     private boolean active;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "books_authors",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new HashSet<>();
 }
 

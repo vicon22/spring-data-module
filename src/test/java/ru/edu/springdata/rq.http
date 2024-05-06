@@ -1,0 +1,78 @@
+###get all books
+GET localhost:8085/books
+
+###get
+GET localhost:8085/books/10
+
+###update War and peace
+PUT localhost:8085/books
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Война миров2",
+  "language": "English",
+  "category": {
+    "id": 1,
+    "name": "Fantasy"
+  },
+  "active": true,
+  "authors": [
+    {
+      "id": 1,
+      "firstName": "Герберт",
+      "lastName": "Уэллс",
+      "phone": null,
+      "address": {
+        "id": 1,
+        "city": "Лондон",
+        "street": "Кент"
+      }
+    }
+  ]
+}
+
+###add new book
+POST localhost:8085/books
+Content-Type: application/json
+
+{
+  "id": 10,
+  "title": "Война миров2",
+  "language": "English",
+  "category": {
+    "id": 1,
+    "name": "Fantasy"
+  },
+  "active": true,
+  "authors": [
+    {
+      "id": 10,
+      "firstName": "Gerbert",
+      "phone": null,
+      "address": {
+        "id": 1,
+        "city": "Лондон",
+        "street": "Кент"
+      }
+    }
+  ]
+}
+
+###delete a book
+DELETE localhost:8085/books/2
+
+###get all books
+GET localhost:8085/books
+
+###get by language
+GET localhost:8085/books/get/language/Russian
+
+###get by category id
+GET localhost:8085/books/get/category/3
+
+###get by category name and language
+GET http://localhost:8085/books/get/category/Novel/language/Russian
+
+###
+GET http://localhost:8085/books/get/authorId/1
